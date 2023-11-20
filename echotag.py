@@ -27,7 +27,7 @@ def overwriteFingerprints(labeledDataList):
 def addFingerprint(labeledData):
     global refs
 
-    refs.append(labeledData)
+    refs.append({"raw": labeledData.raw, "label": labeledData.label})
 
     return refs
 
