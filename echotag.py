@@ -36,7 +36,7 @@ def removeFingerprint(label):
     global refs
 
     for i in range(len(refs)):
-        if refs[i].label == label:
+        if refs[i]['label'] == label:
             refs.pop(i)
             break
 
