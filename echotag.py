@@ -64,8 +64,6 @@ def label(unlabeledDataList):
 
         signals[i]['spectrum'] = np.abs(np.fft.fft(signals[i]['raw']))
 
-    print(refs)
-
     # Step 2-2: Classification
     for i in range(len(signals)):
         max_corr = 0
