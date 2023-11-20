@@ -1,29 +1,38 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
+import echotag
+from typing import Optional
 
 app = FastAPI()
 
-class TrainingData(BaseModel):
+
+class LabeledData(BaseModel):
     raw: list[float]
     label: str
 
-@app.post("/train")
-async def train_model(data: TrainingData):
-    # Access the raw data and label
-    raw_data = data.raw
-    label = data.label
 
-    # Perform training logic here (you can replace this with your actual training code)
-    # For demonstration purposes, we'll just print the data.
-    print("Training Data:")
-    print("Raw Data:", raw_data)
-    print("Label:", label)
+class UnlabeledData(BaseModel):
+    raw: list[float]
 
-    # You can return a response if needed
-    return {"message": "Model training complete", "status": "success"}
 
-@app.get("/")
+@app.post("/overwrite-fingerprints")
+async def overwriteFingerprints(labeledDataList: list[LabeledData]):
+    return echotag.overwriteFingerprints(labeledDataList)
+
+
+@app.post("/add-fingerprint")
+async def addFingerprint(labeledData: LabeledData):
+    return echotag.addFingerprint(labeledData)
+
+
+@app.post("/label")
+async def label(unlabeledDataList: list[UnlabeledData]):
+
+    return echotag.label(unlabeledDataList)
+
+
+@app.get("/health")
 async def healthcheck():
     # You can return a response if needed
     return {"message": "health check!"}
