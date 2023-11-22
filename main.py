@@ -41,6 +41,11 @@ async def removeFingerprint(removeFingerprintRequest: RemoveFingerprintRequest):
     return echotag.removeFingerprint(removeFingerprintRequest.label)
 
 
+@app.get("/get-fingerprint-labels")
+async def getFingerprintLabel():
+    return echotag.getFingerprintLabels()
+
+
 @app.get("/health")
 async def healthcheck():
     # You can return a response if needed
@@ -48,6 +53,6 @@ async def healthcheck():
 
 if __name__ == "__main__":
     # TODO 로컬 배포
-    # uvicorn.run("main:app", host="127.0.0.1", port=8080, reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=8080, reload=True)
     # TODO 실서버 배포
-    uvicorn.run("main:app", host="0.0.0.0", port=8080)
+    # uvicorn.run("main:app", host="0.0.0.0", port=8080)

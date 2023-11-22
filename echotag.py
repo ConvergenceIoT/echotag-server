@@ -18,10 +18,24 @@ with open('./data/chirp_sampled.json', 'r') as chirp_sampled_file:
 def overwriteFingerprints(labeledDataList):
     global refs
 
+    # clear refs
+    refs = []
+
     for labeledData in labeledDataList:
         refs.append({"raw": labeledData.raw, "label": labeledData.label})
 
     return refs
+
+
+def getFingerprintLabels():
+    global refs
+
+    labels = []
+
+    for ref in refs:
+        labels.append(ref["label"])
+
+    return labels
 
 
 def addFingerprint(labeledData):
